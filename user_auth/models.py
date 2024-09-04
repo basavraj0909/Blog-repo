@@ -33,7 +33,6 @@ class User(models.Model):
         if not self.user_id:
             # Generate a UUID and format it as desired
             self.user_id = self.generate_user_id()
-
             self.user_id = f"{self.user_id[:4]}-{self.user_id[4:8]}-{self.user_id[8:]}"
 
         # Call the parent class's save method
