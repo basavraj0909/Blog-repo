@@ -14,7 +14,8 @@ print(f"Sections in config: {config.sections()}")
 
 SECRET_KEY = config.get('DJANGO', 'SECRET_KEY')
 DEBUG = config.getboolean('DJANGO', 'DEBUG')
-ALLOWED_HOSTS = config.get('DJANGO', 'ALLOWED_HOSTS').split(',')
+# ALLOWED_HOSTS = config.get('DJANGO', 'ALLOWED_HOSTS').split(',')
+ALLOWED_HOSTS = ['localhost']
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
@@ -31,7 +32,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,23 +46,24 @@ INSTALLED_APPS = [
 
     'blog_app',
     'accounts',
+    'user_auth',
 ]
 
-# JWT Settings
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS': True,
-    'BLACKLIST_AFTER_ROTATION': True,
-    'ALGORITHM': 'HS256',
-    'SIGNING_KEY': SECRET_KEY,  # Ensure this is strong and secure
-    'AUTH_HEADER_TYPES': ('Bearer',),
-    'USER_ID_FIELD': 'id',
-    'USER_ID_CLAIM': 'user_id',
-}
+# # JWT Settings
+# SIMPLE_JWT = {
+#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+#     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+#     'ROTATE_REFRESH_TOKENS': True,
+#     'BLACKLIST_AFTER_ROTATION': True,
+#     'ALGORITHM': 'HS256',
+#     'SIGNING_KEY': SECRET_KEY,  # Ensure this is strong and secure
+#     'AUTH_HEADER_TYPES': ('Bearer',),
+#     'USER_ID_FIELD': 'id',
+#     'USER_ID_CLAIM': 'user_id',
+# }
 
 # REST Framework settings
-REST_FRAMEWORK = {
+"""REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
@@ -70,7 +71,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.openapi.AutoSchema',
-}
+}"""
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -103,7 +104,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'blogproject.wsgi.application'
 
 # Database
-# Database
 DATABASES = {
     'default': {
         'ENGINE': config.get('DATABASE', 'ENGINE'),
@@ -114,9 +114,6 @@ DATABASES = {
         'PORT': config.get('DATABASE', 'PORT'),
     }
 }
-
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -133,9 +130,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -144,12 +138,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = 'static/'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

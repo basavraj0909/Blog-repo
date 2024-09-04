@@ -1,0 +1,94 @@
+#### 1. **Create a New User (POST /users/)**
+
+python
+import requests
+
+url = "http://localhost:8000/users/"
+headers = {"Authorization": "Bearer <your_token>"}
+data = {
+    "first_name": "Alice",
+    "last_name": "Johnson",
+    "age": 28,
+    "email": "alice.johnson@example.com",
+    "mobile_number": "1122334455"
+}
+
+response = requests.post(url, headers=headers, json=data)
+
+print("Status Code:", response.status_code)
+print("Response JSON:", response.json())
+```
+
+#### 2. **Get All Users (GET /users/)**
+
+```python
+url = "http://localhost:8000/users/"
+headers = {"Authorization": "Bearer <your_token>"}
+
+response = requests.get(url, headers=headers)
+
+print("Status Code:", response.status_code)
+print("Response JSON:", response.json())
+```
+
+#### 3. **Get a Single User (GET /users/<int:pk>/)**
+
+```python
+url = "http://localhost:8000/users/1/"
+headers = {"Authorization": "Bearer <your_token>"}
+
+response = requests.get(url, headers=headers)
+
+```
+
+#### 4. **Update a User (PUT /users/<int:pk>/)**
+
+```python
+url = "http://localhost:8000/users/1/"
+headers = {"Authorization": "Bearer <your_token>"}
+data = {
+    "first_name": "Alice",
+    "last_name": "Johnson",
+    "age": 29,  # Updated age
+    "email": "alice.johnson@example.com",
+    "mobile_number": "1122334455"
+}
+
+response = requests.put(url, headers=headers, json=data)
+
+print("Status Code:", response.status_code)
+print("Response JSON:", response.json())
+```
+
+#### 5. **Partially Update a User (PATCH /users/<int:pk>/)**
+
+```python
+url = "http://localhost:8000/users/1/"
+headers = {"Authorization": "Bearer <your_token>"}
+data = {
+    "age": 30  # Only updating the age
+}
+
+response = requests.patch(url, headers=headers, json=data)
+
+print("Status Code:", response.status_code)
+print("Response JSON:", response.json())
+```
+
+#### 6. **Delete a User (DELETE /users/<int:pk>/)**
+
+```python
+url = "http://localhost:8000/users/1/"
+headers = {"Authorization": "Bearer <your_token>"}
+
+response = requests.delete(url, headers=headers)
+
+print("Status Code:", response.status_code)
+```
+
+### Notes:
+- **`<your_token>`**: Replace `<your_token>` with the actual JWT token or authentication token you are using in your API. This is necessary if your API endpoints require authentication.
+- **`http://localhost:8000`**: Replace this URL with the actual base URL of your Django application if it's hosted somewhere other than `localhost`.
+- **`response.json()`**: This will return the response content in JSON format if the response is in JSON. Use `response.text` if the response is in another format.
+
+These examples should help you automate the testing of your Django REST API endpoints using the `requests` library.
